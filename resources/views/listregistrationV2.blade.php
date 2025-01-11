@@ -279,8 +279,8 @@
             modal.find('#currentImageSamping').attr('src', "{{ url('/img') }}/" + imgsamping);
             modal.find('#imageLinkSamping').attr('href', "{{ url('/img') }}/" + imgsamping);
 
-            modal.find('#currentImageTransfer').attr('src', "{{ url('/webevent/public/invoice') }}/" + buktiTransfer);
-            modal.find('#imageLinkTransfer').attr('href', "{{ url('/webevent/public/invoice') }}/" + buktiTransfer);
+            modal.find('#currentImageTransfer').attr('src', "{{ url('/invoice') }}/" + buktiTransfer);
+            modal.find('#imageLinkTransfer').attr('href', "{{ url('/invoice') }}/" + buktiTransfer);
 
             if (!buktiTransfer || !buktiTransfer.includes('.jpg')) {
                 const textElement = $('<span>')

@@ -47,7 +47,7 @@ class RegisterController extends Controller
             $filenameDepan = null;
             if ($request->hasFile('foto_depan')) {
                 $file = $request->file('foto_depan');
-                $filenameDepan = 'fotodepan_'.$idKategori.'_'.Carbon::now()->addHours(7)->format('Ymd').'-'.$request->input('nomor_hp').'.jpg';
+                $filenameDepan = 'fotodepan_'.$idKategori.'_'.Carbon::now()->addHours(7)->format('YmdHis').'-'.$request->input('nomor_hp').'.jpg';
                 $file->move(public_path('img'), $filenameDepan);
             }
 
@@ -55,7 +55,7 @@ class RegisterController extends Controller
             $filenameBelakang = null;
             if ($request->hasFile('foto_belakang')) {
                 $file = $request->file('foto_belakang');
-                $filenameBelakang = 'fotobelakang_'.$idKategori.'_'.Carbon::now()->addHours(7)->format('Ymd').'-'.$request->input('nomor_hp').'.jpg';
+                $filenameBelakang = 'fotobelakang_'.$idKategori.'_'.Carbon::now()->addHours(7)->format('YmdHis').'-'.$request->input('nomor_hp').'.jpg';
                 $file->move(public_path('img'), $filenameBelakang);
             }
 
@@ -63,13 +63,13 @@ class RegisterController extends Controller
             $filenameSamping = null;
             if ($request->hasFile('foto_samping')) {
                 $file = $request->file('foto_samping');
-                $filenameSamping = 'fotosamping_'.$idKategori.'_'.Carbon::now()->addHours(7)->format('Ymd').'-'.$request->input('nomor_hp').'.jpg';
+                $filenameSamping = 'fotosamping_'.$idKategori.'_'.Carbon::now()->addHours(7)->format('YmdHis').'-'.$request->input('nomor_hp').'.jpg';
                 $file->move(public_path('img'), $filenameSamping);
             }
 
             $kodeUnik = mt_rand(100, 999);
             $totalBayar = $hargaKategori + $kodeUnik + $request->input('jasaLayanan');
-            $idTransaksi = Carbon::now()->addHours(7)->format('dmY') . substr($request->input('nomor_hp'), -4);
+            $idTransaksi = Carbon::now()->addHours(7)->format('dmYHis') . substr($request->input('nomor_hp'), -4);
 
             // Simpan data registrasi
             DB::table('peserta')->insert([
@@ -106,60 +106,73 @@ class RegisterController extends Controller
             
             // Konten HTML untuk email
             $bodyEmail = '
-                <html>
-                <body>
-                    <h1 style="color: #3490dc;">[SUKSES] Terima kasih atas pendaftaran Anda, ' . $data['nama_lengkap'] . '</h1>
-                    <p>Selamat bergabung dengan kami!</p>
-                    <p>Berikut adalah informasi pendaftaran Anda:</p>
-                    
-                    <table border="1" cellpadding="10" cellspacing="0" style="border-collapse: collapse; width: 50%;">
-                        <tr>
-                            <th style="background-color: #f2f2f2; text-align: left;">Informasi</th>
-                            <th style="background-color: #f2f2f2; text-align: left;">Detail</th>
-                        </tr>
-                        <tr>
-                            <td>ID Transaksi</td>
-                            <td>' . $data['idTransaksi'] . '</td>
-                        </tr>
-                        <tr>
-                            <td>Nama Peserta</td>
-                            <td>' . $data['nama_lengkap'] . '</td>
-                        </tr>
-                        <tr>
-                            <td>Kategori</td>
-                            <td>' . $data['nama_kategori'] . '</td>
-                        </tr>
-                        <tr>
-                            <td>Nama Team</td>
-                            <td>' . $data['nama_team'] . '</td>
-                        </tr>
-                        <tr>
-                            <td>Nomor Handphone</td>
-                            <td>' . $data['nomor_hp'] . '</td>
-                        </tr>
-                    </table>
+            <html>
+            <body>
+                <h1 style="color: #3490dc;">[DETAIL INVOICE] Terima kasih atas pendaftaran Anda, ' . $data['nama_lengkap'] . '</h1>
+                <p>Selamat bergabung dengan kami!</p>
+                <p>Berikut adalah informasi pendaftaran Anda:</p>
+                
+                <table border="1" cellpadding="10" cellspacing="0" style="border-collapse: collapse; width: 50%;">
+                    <tr>
+                        <th style="background-color: #f2f2f2; text-align: left;">Informasi</th>
+                        <th style="background-color: #f2f2f2; text-align: left;">Detail</th>
+                    </tr>
+                    <tr>
+                        <td>ID Transaksi</td>
+                        <td>' . $data['idTransaksi'] . '</td>
+                    </tr>
+                    <tr>
+                        <td>Nama Peserta</td>
+                        <td>' . $data['nama_lengkap'] . '</td>
+                    </tr>
+                    <tr>
+                        <td>Kategori</td>
+                        <td>' . $data['nama_kategori'] . '</td>
+                    </tr>
+                    <tr>
+                        <td>Nama Team</td>
+                        <td>' . $data['nama_team'] . '</td>
+                    </tr>
+                    <tr>
+                        <td>Nomor Handphone</td>
+                        <td>' . $data['nomor_hp'] . '</td>
+                    </tr>
+                </table>
 
-                    <br>
-                    <h4 style="color: #28a745;">Informasi Pembayaran:</h4>
-                    <div style="border: 1px solid #28a745; padding: 15px; border-radius: 8px; background-color: #f9f9f9;">
-                        <p style="font-size: 16px; color: #333;">Total Pembayaran:</p>
-                        <h2 style="color: #28a745;">Rp ' . number_format($data['totalbayar'], 0, ',', '.') . '</h2>
-                        <p style="font-size: 14px; color: #555;">Jumlah yang harus dibayar untuk pendaftaran. Contoh: 200.023, kode angka belakang sesuai plate number riders "23".</p>
-                        <p style="font-size: 14px; color: #555;">Harap memberi keterangan transfer (nama rider_kategori class).</p>
-                        <br>
-                        <h5 style="color: #007bff;">Informasi Rekening:</h5>
-                        <ul style="list-style-type: none; padding: 0;">
-                            <li><strong>Bank:</strong> '.$data['bank'].'</li>
-                            <li><strong>Nomor Rekening:</strong> '.$data['norek'].'</li>
-                            <li><strong>Atas Nama:</strong> '.$data['namarek'].'</li>
-                        </ul>
-                    </div>
-                    <br>
-                    <p>Silakan hubungi kami jika Anda memiliki pertanyaan lebih lanjut.</p>
-                    <p>Salam,</p>
-                    <p><strong>Customer Support</strong></p>
-                </body>
-                </html>
+                <br>
+                <h4 style="color: #28a745;">Informasi Pembayaran:</h4>
+                <div>
+                <table border="1" cellpadding="10" cellspacing="0" style="border-collapse: collapse; width: 50%;">
+                    <tr>
+                        <td>Biaya Registrasi </td>
+                        <td>Rp ' . number_format($hargaKategori, 0, ',', '.') . '</td>
+                    </tr>
+                    <tr>
+                        <td>Biaya Layanan</td>
+                        <td>Rp ' . number_format($request->input('jasaLayanan'), 0, ',', '.') . '</td>
+                    </tr>
+                    <tr>
+                        <td>Kode Unik</td>
+                        <td>Rp ' . number_format($kodeUnik, 0, ',', '.') . '</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Total Bayar</strong></td>
+                        <td><strong>Rp ' . number_format($data['totalbayar'], 0, ',', '.') . '</strong></td>
+                    </tr>
+                </table>
+                <h5 style="color: #007bff;">Informasi Rekening:</h5>
+                <ul style="list-style-type: none; padding: 0;">
+                    <li><strong>Bank:</strong> '.$data['bank'].'</li>
+                    <li><strong>Nomor Rekening:</strong> '.$data['norek'].'</li>
+                    <li><strong>Atas Nama:</strong> '.$data['namarek'].'</li>
+                </ul>
+                </div>
+                <br>
+                <p>Silakan hubungi kami jika Anda memiliki pertanyaan lebih lanjut.</p>
+                <p>Salam,</p>
+                <p><strong>Customer Support</strong></p>
+            </body>
+            </html>
             ';
 
             Mail::html($bodyEmail, function ($message) use ($data) {
@@ -209,6 +222,9 @@ class RegisterController extends Controller
                 'nama_team' => $dataPeserta->nama_team,
                 'kategori' => $dataPeserta->nama_kategori,
                 'nomor_hp' => $dataPeserta->nomor_hp,
+                'harga_kategori' => $dataPeserta->harga_kategori,
+                'jasa_layanan' => $dataPeserta->jasa_layanan,
+                'kode_unik' => $dataPeserta->kode_unik,
                 'total_bayar' => $dataPeserta->total_bayar,
                 'status_pembayaran' => $dataPeserta->status_user,
                 'nama_bank' => $dataPeserta->nama_bank,
@@ -430,7 +446,7 @@ class RegisterController extends Controller
 
                 Mail::html($bodyEmail, function ($message) use ($data) {
                     $message->to($data['email'], $data['nama_lengkap']);
-                    $message->subject('Konfirmasi Pendaftaran');
+                    $message->subject('Registrasi Berhasil');
                 });
                 
                 DB::table('peserta')
