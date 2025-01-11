@@ -270,17 +270,17 @@
             modal.find('#modalAlamat').val(alamat);
             modal.find('#idTransaksi').val(idtransaksi);
 
-            modal.find('#currentImageDepan').attr('src', "{{ url('/img') }}/" + imgdepan);
-            modal.find('#imageLinkDepan').attr('href', "{{ url('/img') }}/" + imgdepan);
+            modal.find('#currentImageDepan').attr('src', "{{ url('macevent/public/img') }}/" + imgdepan);
+            modal.find('#imageLinkDepan').attr('href', "{{ url('macevent/public/img') }}/" + imgdepan);
 
-            modal.find('#currentImageBelakang').attr('src', "{{ url('/img') }}/" + imgbelakang);
-            modal.find('#imageLinkBelakang').attr('href', "{{ url('/img') }}/" + imgbelakang);
+            modal.find('#currentImageBelakang').attr('src', "{{ url('macevent/public/img') }}/" + imgbelakang);
+            modal.find('#imageLinkBelakang').attr('href', "{{ url('macevent/public/img') }}/" + imgbelakang);
 
-            modal.find('#currentImageSamping').attr('src', "{{ url('/img') }}/" + imgsamping);
-            modal.find('#imageLinkSamping').attr('href', "{{ url('/img') }}/" + imgsamping);
+            modal.find('#currentImageSamping').attr('src', "{{ url('macevent/public/img') }}/" + imgsamping);
+            modal.find('#imageLinkSamping').attr('href', "{{ url('macevent/public/img') }}/" + imgsamping);
 
-            modal.find('#currentImageTransfer').attr('src', "{{ url('/invoice') }}/" + buktiTransfer);
-            modal.find('#imageLinkTransfer').attr('href', "{{ url('/invoice') }}/" + buktiTransfer);
+            modal.find('#currentImageTransfer').attr('src', "{{ url('macevent/public/invoice') }}/" + buktiTransfer);
+            modal.find('#imageLinkTransfer').attr('href', "{{ url('macevent/public/invoice') }}/" + buktiTransfer);
 
             if (!buktiTransfer || !buktiTransfer.includes('.jpg')) {
                 const textElement = $('<span>')
@@ -311,7 +311,10 @@
             if (nomorHp.startsWith("0")) {
                 nomorHp = "62" + nomorHp.substring(1);
             }
-            var waLink = "https://wa.me/" + nomorHp + "?text=Hallo%20Robo%20Racer,,%0aMohon%20konfrmasi%20untuk%20pendftaran%20Robo%20Race%202025%20apakah%20mau%20untuk%20melanjutkan%20registrasi%20kak?%0aRobo%20tunggu%20konfirmasinya%20hari%20ini%20jam%2020:00%20wib%20dengan%20melampirkan%20bukti%20Transfer.%0aTerimakasih,,";
+            var message = "Hallo, " + nama + "%0a"
+            message = message + "Mohon%20konfrmasi%20untuk%20pendftaran%20kategori%20" + kategori + "%20apakah%20mau%20untuk%20melanjutkan%20registrasi%20kak?%0a"
+            message = message + "Kami%20tunggu%20konfirmasinya%20hari%20ini%20jam%2020:00%20wib%20dengan%20melampirkan%20bukti%20Transfer.%0aTerimakasih,,"
+            var waLink = "https://wa.me/" + nomorHp + "?text=" + message;
             $(this).find('a#proses-edit').attr('href', waLink).off('click').on('click', function(e) {
                 e.preventDefault(); 
                 $.ajax({
