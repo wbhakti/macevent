@@ -67,14 +67,17 @@
                         <div class="button-group">
                             <form method="POST" action="/postevent">
                                 @csrf
-                                <input type="hidden" name="rowid" value="{{ $item->rowid }}">
+                                <input type="hidden" name="rowid" value="{{ $item->id_event }}">
                                 <input type="hidden" name="old_img_event" value="{{ $item->img_event }}">
                                 <div class="button-group">
                                     <button type="button" class="btn btn-primary mb-2 btn-edit"
-                                        data-rowid="{{ $item->rowid }}"
+                                        data-rowid="{{ $item->id_event }}"
                                         data-title="{{ $item->title_event }}"
                                         data-desc="{{ $item->desc_event }}"
                                         data-img="{{ $item->img_event }}"
+                                        data-bank="{{ $item->nama_bank }}"
+                                        data-norek="{{ $item->nomor_rekening }}"
+                                        data-namarek="{{ $item->nama_rekening }}"
                                         data-isactive="{{ $item->is_active }}">Edit</button>
                                     <button type="submit" name="proses" value="delete" class="btn btn-danger mb-2">Delete</button>
                                 </div>
@@ -189,6 +192,20 @@
                             <label for="editImgEvent"><b>Image Event</b></label>
                             <input type="file" name="img_event" id="editImgEvent" class="form-control" accept="image/*" />
                         </div>
+
+                        <div class="form-group">
+                            <label for="editNamaBank"><b>Nama BANK</b></label>
+                            <input type="text" name="nama_bank" id="editNamaBank" class="form-control" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="editNorek"><b>Nomor Rekening</b></label>
+                            <input type="text" name="nomor_rekening" id="editNorek" class="form-control" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="editNamarek"><b>Nama Rekening</b></label>
+                            <input type="text" name="nama_rekening" id="editNamarek" class="form-control" required />
+                        </div>
+
                         <div class="form-group">
                             <label><b>Current Image</b></label>
                             <img id="currentImage" src="" alt="Current Image" style="max-width: 100px; max-height: 100px;">
@@ -244,6 +261,9 @@ $(document).ready(function() {
             var desc = $(this).data('desc');
             var img = $(this).data('img');
             var isactive = $(this).data('isactive');
+            var bank = $(this).data('bank');
+            var norek = $(this).data('norek');
+            var namarek = $(this).data('namarek');
 
             // Set modal data
             $('#editRowid').val(rowid);
@@ -252,6 +272,9 @@ $(document).ready(function() {
             $('#editOldImgEvent').val(img);
             $('#editIsActive').val(isactive);
             $('#currentImage').attr('src', "{{ asset('img/') }}/" + img);
+            $('#editNamaBank').val(bank);
+            $('#editNorek').val(norek);
+            $('#editNamarek').val(namarek);
 
             // Show modal
             $('#editModal').modal('show');

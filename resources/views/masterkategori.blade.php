@@ -65,9 +65,13 @@
                         <div class="button-group">
                             <form method="POST" action="/postkategori">
                                 @csrf
-                                <input type="hidden" name="rowid" value="{{ $item->rowid }}">
+                                <input type="hidden" name="rowid" value="{{ $item->id_kategori }}">
                                 <div class="button-group">
-                                    <button type="submit" name="proses" value="delete" class="btn btn-danger">Delete</button>
+                                    <button type="button" class="btn btn-primary mb-2 btn-edit"
+                                        data-rowid="{{ $item->id_kategori }}"
+                                        data-nama="{{ $item->nama_kategori }}"
+                                        data-harga="{{ $item->harga_kategori }}">Edit</button>
+                                    <button type="submit" name="proses" value="delete" class="btn btn-danger mb-2">Delete</button>
                                 </div>
                             </form>
                         </div>
@@ -125,6 +129,41 @@
         </div>
     </div>
 
+    <!-- Edit Modal -->
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit Kategori</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="editForm" method="POST" action="/postkategori">
+                        @csrf
+                        <input type="hidden" name="proses" value="edit">
+                        <input type="hidden" name="rowid" id="editRowid">
+
+                        <div class="form-group">
+                            <label for="editNama"><b>Nama Kategori</b></label>
+                            <input type="text" name="nama_kategori" id="editNama" class="form-control" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="editHarga"><b>Harga Kategori</b></label>
+                            <input type="text" name="harga_kategori" id="editHarga" class="form-control" required />
+                        </div>
+                        
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 @if(session('success'))
@@ -153,6 +192,25 @@ $(document).ready(function() {
     $(document).ready(function() {
         $("#toggleButton").click(function() {
             $("#myForm").toggle();
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        // Edit button click event
+        $('.btn-edit').on('click', function() {
+            var rowid = $(this).data('rowid');
+            var nama = $(this).data('nama');
+            var harga = $(this).data('harga');
+
+            // Set modal data
+            $('#editRowid').val(rowid);
+            $('#editNama').val(nama);
+            $('#editHarga').val(harga);
+
+            // Show modal
+            $('#editModal').modal('show');
         });
     });
 </script>

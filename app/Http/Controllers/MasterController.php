@@ -158,20 +158,22 @@ class MasterController extends Controller
 
                 // Update data di database
                 DB::table('event')
-                    ->where('rowid', $request->input('rowid'))
+                    ->where('id_event', $request->input('rowid'))
                     ->update([
                         'img_event' => $fileName,
                         'title_event' => $request->input('title_event'),
                         'desc_event' => $request->input('desc_event'),
-                        'action' => $request->input('action_event'),
                         'is_active' => $request->input('is_active'),
+                        'nama_bank' => $request->input('nama_bank'),
+                        'nomor_rekening' => $request->input('nomor_rekening'),
+                        'nama_rekening' => $request->input('nama_rekening'),
                     ]);
 
                 return redirect()->back()->with('success', 'Edit event success!');
             }
             else{
                 //delete
-                DB::table('event')->where('rowid', $request->input('rowid'))->delete();
+                DB::table('event')->where('id_event', $request->input('rowid'))->delete();
 
                 return redirect()->back()->with('success', 'Delete event success!');
             }
@@ -195,7 +197,6 @@ class MasterController extends Controller
             
             $listEvent = DB::table('event')->get();
 
-            // Mengirim data ke tampilan
             return view('masterkategori', [
                 'data' => $listKategori,
                 'event' => $listEvent
@@ -226,9 +227,21 @@ class MasterController extends Controller
 
                 return redirect()->back()->with('success', 'Save success!');
             }
+            else if($request->input('proses') == "edit"){
+                
+                // Update data di database
+                DB::table('kategori')
+                    ->where('id_kategori', $request->input('rowid'))
+                    ->update([
+                        'nama_kategori' => $request->input('nama_kategori'),
+                        'harga_kategori' => $request->input('harga_kategori'),
+                    ]);
+
+                return redirect()->back()->with('success', 'Edit kategori success!');
+            }
             else{
                 //delete
-                DB::table('kategori')->where('rowid', $request->input('rowid'))->delete();
+                DB::table('kategori')->where('id_kategori', $request->input('rowid'))->delete();
 
                 return redirect()->back()->with('success', 'Delete kategori success!');
             }
