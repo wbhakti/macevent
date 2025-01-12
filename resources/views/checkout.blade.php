@@ -49,20 +49,26 @@
 
                         <!-- Informasi Pembayaran -->
                         <div class="mb-4">
-                            <h4 class="mb-2">Total Pembayaran:</h4>
+                            <h4 class="mb-2">Rincian Pembayaran:</h4>
                             <div class="p-3 border border-success rounded bg-light">
-                                <div class="d-flex align-items-center mb-3">
-                                    <div class="me-3">
-                                        <!-- Icon (Optional) -->
-                                        <i class="bi bi-cash-stack fs-3 text-success"></i>
-                                    </div>
-                                    <div>
-                                        <h4 class="mb-0"><span class="text-success">Rp {{ number_format($total_bayar, 0, ',', '.') }}</span></h4>
-                                        <p class="mb-0 text-muted">Jumlah yang harus dibayar untuk pendaftaran.</p>
-                                        <p class="mb-0 text-muted">Contoh 200.023, kode angka belakang sesuai plate number riders "23"</p>
-                                        <p class="mb-0 text-muted">Harap Memberi keterangan transfer (nama rider_kategori class)</p>
-                                    </div>
-                                </div>
+                                <ul class="list-group">
+                                    <li class="list-group-item d-flex justify-content-between">
+                                        <span class="fw-bold">Biaya Registrasi:</span>
+                                        <span class="ms-2 text-secondary">Rp {{ number_format($harga_kategori, 0, ',', '.') }}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between">
+                                        <span class="fw-bold">Biaya Layanan:</span>
+                                        <span class="ms-2 text-secondary">Rp {{ number_format($jasa_layanan, 0, ',', '.') }}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between">
+                                        <span class="fw-bold">Kode Unik:</span>
+                                        <span class="ms-2 text-secondary">Rp {{ number_format($kode_unik, 0, ',', '.') }}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between">
+                                        <span class="fw-bold">Total :</span>
+                                        <span class="fw-bold">Rp {{ number_format($total_bayar, 0, ',', '.') }}</span>
+                                    </li>
+                                </ul>
                                 <!-- Informasi Rekening -->
                                 <div class="mt-3">
                                     <h6 class="text-primary">Informasi Rekening:</h6>

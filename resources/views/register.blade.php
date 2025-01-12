@@ -41,10 +41,6 @@
                                             <input type="text" id="harga_kategori" value="" class="form-control" disabled />
                                         </div>                                        
                                         <div class="mb-3">
-                                            <label for="nama" class="form-label">Jasa Layanan</label>
-                                            <input type="text" value="Rp {{ number_format($jasaLayanan, 0, ',', '.') }}" class="form-control" disabled/>
-                                        </div>
-                                        <div class="mb-3">
                                             <label for="nama" class="form-label">Nama Lengkap</label>
                                             <input type="text" name="nama" id="nama" class="form-control" required />
                                         </div>
