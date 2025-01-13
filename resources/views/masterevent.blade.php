@@ -113,7 +113,7 @@
                             </div>
                             <div class="form-group col-sm-6">
                                 <label for="regulasi_event"><b>Regulasi Event</b></label>
-                                <input type="text" name="regulasi_event" class="form-control" required />
+                                <input type="file" name="img_snk" class="form-control" accept="image/*" />
                             </div>
                         </div>
                         <div class="row justify-content-center">

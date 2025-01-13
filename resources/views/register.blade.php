@@ -18,7 +18,7 @@
             text-decoration: none;
         }
     </style>
-    
+
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -115,44 +115,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <ol>
-                        <li>Untuk zona CAR dan DIESEL, panitia menyediakan tenda.</li>
-                        <li>Batas space/slot display adalah:
-                            <ul>
-                                <li>2,5 x 4 m untuk CAR dan DIESEL.</li>
-                                <li>3 x 5 m untuk truck.</li>
-                            </ul>
-                            Apabila melebihi slot, harap menghubungi panitia.
-                        </li>
-                        <li>Peserta yang menggunakan listrik bisa menghubungi panitia dengan biaya Rp 400.000,-/2 ampere.</li>
-                        <li>Peserta wajib registrasi ulang sebelum loading IN untuk mendapatkan nomor scrut dan tiket ID selama acara berlangsung.</li>
-                        <li>Peserta yang mendirikan special display dimohon koordinasi dengan panitia paling lambat H-2 sebelum loading IN.</li>
-                        <li>Panitia berhak menolak atau membongkar apabila di luar ketentuan.</li>
-                        <li>Loading IN dimulai:
-                            <ul>
-                                <li>21 Februari 2025, jam 20.00 s/d 22 Februari 2025, jam 02.00 WIB.</li>
-                            </ul>
-                            Keterlambatan loading akan dikenakan pengurangan poin.
-                        </li>
-                        <li>Waktu penjurian dibagi menjadi 2 sesi:
-                            <ul>
-                                <li>Hari pertama sesi 1: Jam 11.00 s/d selesai.</li>
-                                <li>Hari kedua sesi 2: Jam 11.00 s/d selesai.</li>
-                            </ul>
-                            Pemilik kendaraan atau yang mewakili wajib mendampingi atau berada di dekat kendaraan ketika penjurian berlangsung untuk mempresentasikan kepada juri.
-                        </li>
-                        <li>Kendaraan peserta tidak diperbolehkan meninggalkan lokasi sebelum acara selesai.</li>
-                        <li>Syarat, regulasi, dan keputusan juri bersifat mutlak dan tidak bisa diganggu gugat.</li>
-                        <li>Prosedur Protes:
-                            <ul>
-                                <li>Protes dilakukan secara tertulis dengan form yang disediakan panitia.</li>
-                                <li>Menyertakan uang jaminan Rp 2.000.000,- sebagai administrasi protes.</li>
-                                <li>Protes hanya diajukan oleh pemilik kendaraan atau pendampingnya.</li>
-                                <li>Hanya peserta yang masuk NOMINE yang mempunyai hak protes.</li>
-                            </ul>
-                        </li>
-                        <li>Kepada seluruh peserta diharapkan menjaga kebersihan dan ketertiban selama acara berlangsung sampai dengan loading OUT demi kenyamanan kita bersama. Panitia dan pihak keamanan berhak menegur peserta yang dianggap mengganggu kenyamanan.</li>
-                    </ol>
+                    <!-- Menampilkan PDF -->
+                    <img src="{{ asset('public/img/'.$dataEvent->regulasi_event) }}" alt="Ketentuan dan Peraturan" width="100%" height="auto" style="border: none;">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>

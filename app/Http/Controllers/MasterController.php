@@ -129,13 +129,18 @@ class MasterController extends Controller
                     return redirect()->back()->with('success', 'Image upload failed.');
                 }
 
+                //image SNK
+                $fileSnk = $request->file('img_snk');
+                $fileNameSnk = date('YmdHis') . '_' . $file->getClientOriginalName();
+                $fileSnk->move('public/img', $fileNameSnk);
+
                 // Simpan data ke database
                 DB::table('event')->insert([
                     'id_event' => 'event'.date('YmdHis'),
                     'title_event' => $request->input('title_event'),
                     'desc_event' => $request->input('desc_event'),
                     'img_event' => $fileName,
-                    'regulasi_event' => $request->input('regulasi_event'),
+                    'regulasi_event' => $fileNameSnk,
                     'nama_bank' => $request->input('nama_bank'),
                     'nomor_rekening' => $request->input('no_rekening'),
                     'nama_rekening' => $request->input('nama_rekening'),
