@@ -36,7 +36,7 @@
                                         <span class="ms-2 text-secondary">{{ $nama_lengkap }}</span>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between">
-                                        <span class="fw-bold">Nama Team:</span>
+                                        <span class="fw-bold">Bengkel atau Komunitas:</span>
                                         <span class="ms-2 text-secondary">{{ $nama_team }}</span>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between">

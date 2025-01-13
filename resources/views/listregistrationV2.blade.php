@@ -77,7 +77,7 @@
                         <th>Event</th>
                         <th>Kategori</th>
                         <th>Nomor HP</th>
-                        <th>Nama Team</th>
+                        <th>Bengkel atau Komunitas</th>
                         <th>Tanggal Daftar</th>
                         <th>Status User</th>
                         <th></th>
@@ -167,7 +167,7 @@
                             <input type="text" class="form-control" id="modalAlamat" name="" readonly>
                         </div>
                         <div class="form-group">
-                            <label for="modalNamaTeam"><strong>Nama Team:</strong></label>
+                            <label for="modalNamaTeam"><strong>Bengkel atau Komunitas:</strong></label>
                             <input type="text" class="form-control" id="modalNamaTeam" name="nama_team" readonly>
                         </div>
                         <div class="form-group">
