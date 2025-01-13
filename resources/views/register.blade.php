@@ -86,7 +86,7 @@
                                         <div class="mb-3 form-check">
                                             <input type="checkbox" class="form-check-input" id="syaratKetentuan" name="syaratKetentuan" disabled required>
                                             <label class="form-check-label text-link" for="syaratKetentuan" data-bs-toggle="modal" data-bs-target="#termsModal">
-                                                Saya menyetujui aturan yang berlaku.
+                                                Dengan ini saya menyatakan bahwa semua data yang saya isi adalah benar dan mematuhi semua peraturan contest, keputusan Juri tidak bisa diganggu gugat.
                                             </label>
                                         </div>
                                         
