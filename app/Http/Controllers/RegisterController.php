@@ -130,7 +130,7 @@ class RegisterController extends Controller
                         <td>' . $data['nama_kategori'] . '</td>
                     </tr>
                     <tr>
-                        <td>Nama Team</td>
+                        <td>Bengkel atau Komunitas</td>
                         <td>' . $data['nama_team'] . '</td>
                     </tr>
                     <tr>
@@ -332,7 +332,7 @@ class RegisterController extends Controller
                 $sheet->setCellValue("A$startRow", 'No');
                 $sheet->setCellValue("B$startRow", 'ID Transaksi');
                 $sheet->setCellValue("C$startRow", 'Nama Lengkap');
-                $sheet->setCellValue("D$startRow", 'Nama Team');
+                $sheet->setCellValue("D$startRow", 'Bengkel atau Komunitas');
                 $sheet->setCellValue("E$startRow", 'Kategori');
                 $sheet->setCellValue("F$startRow", 'Nomor HP');
                 $sheet->setCellValue("G$startRow", 'Kota');
@@ -423,7 +423,7 @@ class RegisterController extends Controller
                                 <td>' . $data['nama_kategori'] . '</td>
                             </tr>
                             <tr>
-                                <td>Nama Team</td>
+                                <td>Bengkel atau Komunitas</td>
                                 <td>' . $data['nama_team'] . '</td>
                             </tr>
                             <tr>

@@ -68,7 +68,7 @@
                                             <input type="text" name="email" id="email" class="form-control" required />
                                         </div>
                                         <div class="mb-3">
-                                            <label for="nama_team" class="form-label">Nama Team</label>
+                                            <label for="nama_team" class="form-label">Bengkel / Komunitas</label>
                                             <input type="text" name="nama_team" id="nama_team" class="form-control" required />
                                         </div>
                                         <div class="mb-3">
