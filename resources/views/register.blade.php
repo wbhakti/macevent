@@ -120,7 +120,7 @@
                 </div>
                 <div class="modal-body">
                     <!-- Menampilkan PDF -->
-                    <img src="{{ asset('public/img/'.$dataEvent->regulasi_event) }}" alt="Ketentuan dan Peraturan" width="100%" height="auto" style="border: none;">
+                    <img src="{{ url('macevent/public/img/'.$dataEvent->regulasi_event) }}" alt="Ketentuan dan Peraturan" width="100%" height="auto" style="border: none;">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
