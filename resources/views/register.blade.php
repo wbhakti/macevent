@@ -88,7 +88,11 @@
                                             <label class="form-check-label text-link" for="syaratKetentuan" data-bs-toggle="modal" data-bs-target="#termsModal">
                                                 Saya menyetujui aturan yang berlaku.
                                             </label>
-                                        </div>                                        
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label class="form-label"> <strong>⁠Info booking slot ( 0856-2893-336 )</strong></label>
+                                        </div>
                                     </div>
                                 </div>
                                 
