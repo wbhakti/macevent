@@ -77,7 +77,7 @@
                 <div class="col-md-4 mb-5">
                     <div class="card shadow h-100">
                         <img src="{{ asset('img/' . $item->img_event) }}" class="card-img-top"
-                            alt="{{ $item->title_event }}" style="height: 200px; object-fit: cover;">
+                            alt="{{ $item->title_event }}" style="object-fit: cover;">
                         <div class="card-body">
                             <h4 class="card-title">{{ $item->title_event }}</h4>
                             <p class="card-text">{{ Str::limit($item->desc_event, 100) }}</p>
