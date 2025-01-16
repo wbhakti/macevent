@@ -146,6 +146,7 @@ class MasterController extends Controller
                     'nama_rekening' => $request->input('nama_rekening'),
                     'jasa_layanan' => $request->input('jasa_layanan'),
                     'is_active' => 'Y',
+                    'kontak_info' => $request->input('kontak_info'),
                     'addtime' => Carbon::now()->addHours(7)->format('Y-m-d H:i:s'),
                 ]);
 
@@ -172,6 +173,7 @@ class MasterController extends Controller
                         'nama_bank' => $request->input('nama_bank'),
                         'nomor_rekening' => $request->input('nomor_rekening'),
                         'nama_rekening' => $request->input('nama_rekening'),
+                        'kontak_info' => $request->input('kontak_info'),
                     ]);
 
                 return redirect()->back()->with('success', 'Edit event success!');

@@ -111,7 +111,8 @@
                                     data-imgbelakang="{{ $item->foto_belakang }}"
                                     data-imgsamping="{{ $item->foto_samping }}"
                                     data-kota="{{ $item->kota_asal }}"
-                                    data-kategori="{{ $item->nama_kategori }}">
+                                    data-kategori="{{ $item->nama_kategori }}"
+                                    data-qtyslot="{{ $item->qty_slot }}">
                                     Detail
                                 </button>
                                 <form method="POST" action="/postapproveuser">
@@ -175,21 +176,13 @@
                             <input type="text" class="form-control" id="modalkategori" name="kategori" readonly>
                         </div>
                         <div class="form-group">
-                            <label><strong>Foto Depan:</strong></label>
+                            <label for="modalqtyslot"><strong>Jumlah Slot:</strong></label>
+                            <input type="text" class="form-control" id="modalqtyslot" name="qty_slot" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label><strong>Foto Kendaraan:</strong></label>
                             <a id="imageLinkDepan" href="#" target="_blank">
                                 <img id="currentImageDepan" src="" alt="Current Image" style="max-width: 100px; max-height: 100px;">
-                            </a>
-                        </div>
-                        <div class="form-group">
-                            <label><strong>Foto Belakang:</strong></label>
-                            <a id="imageLinkBelakang" href="#" target="_blank">
-                                <img id="currentImageBelakang" src="" alt="Current Image" style="max-width: 100px; max-height: 100px;">
-                            </a>
-                        </div>
-                        <div class="form-group">
-                            <label><strong>Foto Samping:</strong></label>
-                            <a id="imageLinkSamping" href="#" target="_blank">
-                                <img id="currentImageSamping" src="" alt="Current Image" style="max-width: 100px; max-height: 100px;">
                             </a>
                         </div>
                         <div class="form-group">
@@ -258,6 +251,7 @@
             var statusUser = button.data('statususer');
             var buktiTransfer = button.data('buktitransfer');
             var idtransaksi = button.data('idtransaksi');
+            var qtyslot = button.data('qtyslot');
 
             var modal = $(this);
             modal.find('#editRowid').val(rowid);
@@ -267,8 +261,9 @@
             modal.find('#modalNamaTeam').val(namaTeam);
             modal.find('#modalTanggalDaftar').val(tanggalDaftar);
             modal.find('#modalkategori').val(kategori);
-            modal.find('#modalAlamat').val(alamat);
             modal.find('#idTransaksi').val(idtransaksi);
+            modal.find('#modalAlamat').val(alamat);
+            modal.find('#modalqtyslot').val(qtyslot);
 
             modal.find('#currentImageDepan').attr('src', "{{ url('macevent/public/img') }}/" + imgdepan);
             modal.find('#imageLinkDepan').attr('href', "{{ url('macevent/public/img') }}/" + imgdepan);

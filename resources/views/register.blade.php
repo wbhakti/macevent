@@ -50,7 +50,11 @@
                                         <div class="mb-3">
                                             <label for="harga_kategori" class="form-label">Harga Kategori</label>
                                             <input type="text" id="harga_kategori" value="" class="form-control" disabled />
-                                        </div>                                        
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="qty_slot" class="form-label">Jumlah Slot</label>
+                                            <input type="number" name="qty_slot" id="qty_slot" value="" class="form-control" required />
+                                        </div>                                          
                                         <div class="mb-3">
                                             <label for="nama" class="form-label">Nama Lengkap</label>
                                             <input type="text" name="nama" id="nama" class="form-control" required />
@@ -61,7 +65,7 @@
                                         </div>
                                         <div class="mb-3">
                                             <label for="nomor_hp" class="form-label">Nomor HP</label>
-                                            <input type="text" name="nomor_hp" id="nomor_hp" class="form-control" required />
+                                            <input type="number" name="nomor_hp" id="nomor_hp" class="form-control" required />
                                         </div>
                                         <div class="mb-3">
                                             <label for="email" class="form-label">Email</label>
@@ -72,16 +76,8 @@
                                             <input type="text" name="nama_team" id="nama_team" class="form-control" required />
                                         </div>
                                         <div class="mb-3">
-                                            <label for="foto_depan" class="form-label">Foto Depan</label>
+                                            <label for="foto_depan" class="form-label">Foto Kendaraan</label>
                                             <input type="file" class="form-control" name="foto_depan" id="foto_depan" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="foto_belakang" class="form-label">Foto Belakang</label>
-                                            <input type="file" class="form-control" name="foto_belakang" id="foto_belakang" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="foto_samping" class="form-label">Foto Samping</label>
-                                            <input type="file" class="form-control" name="foto_samping" id="foto_samping" required>
                                         </div>
                                         <div class="mb-3 form-check">
                                             <input type="checkbox" class="form-check-input" id="syaratKetentuan" name="syaratKetentuan" disabled required>
@@ -91,7 +87,7 @@
                                         </div>
                                         
                                         <div class="mb-3">
-                                            <label class="form-label"> <strong>⁠Info booking slot ( 0856-2893-336 )</strong></label>
+                                            <label class="form-label"> <strong>⁠Info booking slot ( {{$kontakInfo}} )</strong></label>
                                         </div>
                                     </div>
                                 </div>

@@ -78,6 +78,7 @@
                                         data-bank="{{ $item->nama_bank }}"
                                         data-norek="{{ $item->nomor_rekening }}"
                                         data-namarek="{{ $item->nama_rekening }}"
+                                        data-kontakinfo="{{ $item->kontak_info }}"
                                         data-isactive="{{ $item->is_active }}">Edit</button>
                                     <button type="submit" name="proses" value="delete" class="btn btn-danger mb-2">Delete</button>
                                 </div>
@@ -146,6 +147,12 @@
                                 <input type="text" name="jasa_layanan" class="form-control" required />
                             </div>
                         </div>
+                        <div class="row justify-content-left">
+                            <div class="form-group col-sm-6">
+                                <label for="kontak_info"><b>Info Boking sloot :</b></label>
+                                <input type="text" name="kontak_info" class="form-control" required />
+                            </div>
+                        </div>
                         <br />
                         <div align="center">
                             <button type="submit" name="proses" value="save" class="btn btn-success">Save Event</button>
@@ -205,7 +212,10 @@
                             <label for="editNamarek"><b>Nama Rekening</b></label>
                             <input type="text" name="nama_rekening" id="editNamarek" class="form-control" required />
                         </div>
-
+                        <div class="form-group">
+                            <label for="kontak_info"><b>Info Boking sloot :</b></label>
+                            <input type="text" name="kontak_info" id="editKontakInfo" class="form-control" required />
+                        </div>
                         <div class="form-group">
                             <label><b>Current Image</b></label>
                             <img id="currentImage" src="" alt="Current Image" style="max-width: 100px; max-height: 100px;">
@@ -264,6 +274,7 @@ $(document).ready(function() {
             var bank = $(this).data('bank');
             var norek = $(this).data('norek');
             var namarek = $(this).data('namarek');
+            var kontakinfo = $(this).data('kontakinfo');
 
             // Set modal data
             $('#editRowid').val(rowid);
@@ -275,6 +286,8 @@ $(document).ready(function() {
             $('#editNamaBank').val(bank);
             $('#editNorek').val(norek);
             $('#editNamarek').val(namarek);
+            $('#editNamarek').val(namarek);
+            $('#editKontakInfo').val(kontakinfo);
 
             // Show modal
             $('#editModal').modal('show');

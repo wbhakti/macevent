@@ -43,6 +43,10 @@
                                         <span class="fw-bold">Kategori:</span>
                                         <span class="ms-2 text-secondary">{{ $kategori }}</span>
                                     </li>
+                                    <li class="list-group-item d-flex justify-content-between">
+                                        <span class="fw-bold">Jumlah Slot:</span>
+                                        <span class="ms-2 text-secondary">{{ $qty_slot }}</span>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -54,7 +58,7 @@
                                 <ul class="list-group">
                                     <li class="list-group-item d-flex justify-content-between">
                                         <span class="fw-bold">Biaya Registrasi:</span>
-                                        <span class="ms-2 text-secondary">Rp {{ number_format($harga_kategori, 0, ',', '.') }}</span>
+                                        <span class="ms-2 text-secondary">Rp {{ number_format(($harga_kategori * $qty_slot), 0, ',', '.') }} ( {{$qty_slot}} Slot )</span>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between">
                                         <span class="fw-bold">Biaya Layanan:</span>

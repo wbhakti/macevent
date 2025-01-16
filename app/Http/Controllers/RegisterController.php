@@ -28,7 +28,8 @@ class RegisterController extends Controller
             'dataEvent' => $dataEvent,
             'listKategori' => $listKategori,
             'idEvent' => $request->query('event'),
-            'jasaLayanan' => $dataEvent->jasa_layanan
+            'jasaLayanan' => $dataEvent->jasa_layanan,
+            'kontakInfo' => $dataEvent->kontak_info
         ]);
     }
 
@@ -52,23 +53,23 @@ class RegisterController extends Controller
             }
 
             // Upload foto belakang
-            $filenameBelakang = null;
-            if ($request->hasFile('foto_belakang')) {
-                $file = $request->file('foto_belakang');
-                $filenameBelakang = 'fotobelakang_'.$idKategori.'_'.Carbon::now()->addHours(7)->format('YmdHis').'-'.$request->input('nomor_hp').'.jpg';
-                $file->move(public_path('img'), $filenameBelakang);
-            }
+            // $filenameBelakang = null;
+            // if ($request->hasFile('foto_belakang')) {
+            //     $file = $request->file('foto_belakang');
+            //     $filenameBelakang = 'fotobelakang_'.$idKategori.'_'.Carbon::now()->addHours(7)->format('YmdHis').'-'.$request->input('nomor_hp').'.jpg';
+            //     $file->move(public_path('img'), $filenameBelakang);
+            // }
 
-            // Upload foto samping
-            $filenameSamping = null;
-            if ($request->hasFile('foto_samping')) {
-                $file = $request->file('foto_samping');
-                $filenameSamping = 'fotosamping_'.$idKategori.'_'.Carbon::now()->addHours(7)->format('YmdHis').'-'.$request->input('nomor_hp').'.jpg';
-                $file->move(public_path('img'), $filenameSamping);
-            }
-
+            // // Upload foto samping
+            // $filenameSamping = null;
+            // if ($request->hasFile('foto_samping')) {
+            //     $file = $request->file('foto_samping');
+            //     $filenameSamping = 'fotosamping_'.$idKategori.'_'.Carbon::now()->addHours(7)->format('YmdHis').'-'.$request->input('nomor_hp').'.jpg';
+            //     $file->move(public_path('img'), $filenameSamping);
+            // }
+            $qtySlot = $request->input('qty_slot');
             $kodeUnik = mt_rand(100, 999);
-            $totalBayar = $hargaKategori + $kodeUnik + $request->input('jasaLayanan');
+            $totalBayar = ($hargaKategori * $qtySlot) + $kodeUnik + $request->input('jasaLayanan');
             $idTransaksi = Carbon::now()->addHours(7)->format('dmYHis') . substr($request->input('nomor_hp'), -4);
 
             // Simpan data registrasi
@@ -82,10 +83,11 @@ class RegisterController extends Controller
                 'nama_team' => $request->input('nama_team'),
                 'id_kategori' => $idKategori,
                 'foto_depan' => $filenameDepan,
-                'foto_belakang' => $filenameBelakang,
-                'foto_samping' => $filenameSamping,
+                'foto_belakang' => '-',
+                'foto_samping' => '-',
                 'kode_unik' => $kodeUnik,
                 'total_bayar' => $totalBayar,
+                'qty_slot' => $qtySlot,
                 'addtime' => Carbon::now()->addHours(7)->format('Y-m-d H:i:s'),
             ]);
 
@@ -98,6 +100,7 @@ class RegisterController extends Controller
                 'email' => $request->input('email'),
                 'nama_team' => $request->input('nama_team'),
                 'nomor_hp' => $request->input('nomor_hp'),
+                'qty_slot' => $qtySlot,
                 'totalbayar' => $totalBayar,
                 'bank' => $dataEvent->nama_bank,
                 'namarek' => $dataEvent->nama_rekening,
@@ -130,6 +133,10 @@ class RegisterController extends Controller
                         <td>' . $data['nama_kategori'] . '</td>
                     </tr>
                     <tr>
+                        <td>Jumlah Slot</td>
+                        <td>' . $data['qty_slot'] . '</td>
+                    </tr>
+                    <tr>
                         <td>Bengkel atau Komunitas</td>
                         <td>' . $data['nama_team'] . '</td>
                     </tr>
@@ -145,7 +152,7 @@ class RegisterController extends Controller
                 <table border="1" cellpadding="10" cellspacing="0" style="border-collapse: collapse; width: 50%;">
                     <tr>
                         <td>Biaya Registrasi </td>
-                        <td>Rp ' . number_format($hargaKategori, 0, ',', '.') . '</td>
+                        <td>Rp ' . number_format(($hargaKategori * $qtySlot), 0, ',', '.') . ' &#40; ' .$qtySlot. ' Slot &#41;</td>
                     </tr>
                     <tr>
                         <td>Biaya Layanan</td>
@@ -231,6 +238,7 @@ class RegisterController extends Controller
                 'nama_rek' => $dataPeserta->nama_rekening,
                 'nomor_rek' => $dataPeserta->nomor_rekening,
                 'idTransaksi' => $dataPeserta->id_transaksi,
+                'qty_slot' => $dataPeserta->qty_slot,
             ]);
 
         }catch(\Exception $e){
@@ -334,14 +342,15 @@ class RegisterController extends Controller
                 $sheet->setCellValue("C$startRow", 'Nama Lengkap');
                 $sheet->setCellValue("D$startRow", 'Bengkel atau Komunitas');
                 $sheet->setCellValue("E$startRow", 'Kategori');
-                $sheet->setCellValue("F$startRow", 'Nomor HP');
-                $sheet->setCellValue("G$startRow", 'Kota');
-                $sheet->setCellValue("H$startRow", 'Status');
+                $sheet->setCellValue("F$startRow", 'Jumlah Slot');
+                $sheet->setCellValue("G$startRow", 'Nomor HP');
+                $sheet->setCellValue("H$startRow", 'Kota');
+                $sheet->setCellValue("I$startRow", 'Status');
 
                 // Styling header kolom
-                $sheet->getStyle("A$startRow:H$startRow")->getFont()->setBold(true);
-                $sheet->getStyle("A$startRow:H$startRow")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
-                $sheet->getStyle("A$startRow:H$startRow")->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+                $sheet->getStyle("A$startRow:I$startRow")->getFont()->setBold(true);
+                $sheet->getStyle("A$startRow:I$startRow")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+                $sheet->getStyle("A$startRow:I$startRow")->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
 
                 //data ke sheet
                 $row = $startRow + 1;
@@ -352,14 +361,15 @@ class RegisterController extends Controller
                     $sheet->setCellValue("C$row", $data->nama_lengkap);
                     $sheet->setCellValue("D$row", $data->nama_team);
                     $sheet->setCellValue("E$row", $data->kategori);
-                    $sheet->setCellValue("F$row", $data->nomor_hp);
-                    $sheet->setCellValue("G$row", $data->kota_asal);
-                    $sheet->setCellValue("H$row", $data->status_user);
+                    $sheet->setCellValue("F$row", $data->qty_slot);
+                    $sheet->setCellValue("G$row", $data->nomor_hp);
+                    $sheet->setCellValue("H$row", $data->kota_asal);
+                    $sheet->setCellValue("I$row", $data->status_user);
                     $row++;
                 }
 
                 // Auto-size kolom
-                foreach (range('A', 'H') as $columnID) {
+                foreach (range('A', 'I') as $columnID) {
                     $sheet->getColumnDimension($columnID)->setAutoSize(true);
                 }
 
@@ -395,6 +405,7 @@ class RegisterController extends Controller
                     'email' => $request->input('email'),
                     'nama_team' => $request->input('nama_team'),
                     'nomor_hp' => $request->input('nomor_hp'),
+                    'qty_slot' => $request->input('qty_slot'),
                 ];
                 
                 // Konten HTML untuk email
@@ -421,6 +432,10 @@ class RegisterController extends Controller
                             <tr>
                                 <td>Kategori</td>
                                 <td>' . $data['nama_kategori'] . '</td>
+                            </tr>
+                            <tr>
+                                <td>Jumlah Slot</td>
+                                <td>' . $data['qty_slot'] . '</td>
                             </tr>
                             <tr>
                                 <td>Bengkel atau Komunitas</td>
