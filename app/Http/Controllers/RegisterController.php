@@ -69,7 +69,7 @@ class RegisterController extends Controller
             // }
             $qtySlot = $request->input('qty_slot');
             $kodeUnik = mt_rand(100, 999);
-            $totalBayar = ($hargaKategori * $qtySlot) + $kodeUnik + $request->input('jasaLayanan');
+            $totalBayar = ($hargaKategori * $qtySlot) + $kodeUnik + ($qtySlot *$request->input('jasaLayanan'));
             $idTransaksi = Carbon::now()->addHours(7)->format('dmYHis') . substr($request->input('nomor_hp'), -4);
 
             // Simpan data registrasi
@@ -156,7 +156,7 @@ class RegisterController extends Controller
                     </tr>
                     <tr>
                         <td>Biaya Layanan</td>
-                        <td>Rp ' . number_format($request->input('jasaLayanan'), 0, ',', '.') . '</td>
+                        <td>Rp ' . number_format(($request->input('jasaLayanan') * $qtySlot), 0, ',', '.') . ' &#40; ' .$qtySlot. ' Slot &#41;</td>
                     </tr>
                     <tr>
                         <td>Kode Unik</td>

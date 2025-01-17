@@ -62,7 +62,7 @@
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between">
                                         <span class="fw-bold">Biaya Layanan:</span>
-                                        <span class="ms-2 text-secondary">Rp {{ number_format($jasa_layanan, 0, ',', '.') }}</span>
+                                        <span class="ms-2 text-secondary">Rp {{ number_format(($jasa_layanan * $qty_slot), 0, ',', '.') }} ( {{$qty_slot}} Slot )</span>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between">
                                         <span class="fw-bold">Kode Unik:</span>
