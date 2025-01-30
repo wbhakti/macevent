@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class RegisterController extends Controller
 {
@@ -530,6 +531,33 @@ class RegisterController extends Controller
             }
 
             return view('success');
+
+        }catch(\Exception $e){
+            Log::error('Error occurred report : ' . $e->getMessage());
+            return back()->with('error', 'Terjadi kesalahan : ' . $e->getMessage());
+        }
+    }
+
+    public function generatePDF(Request $request)
+    {
+        try{
+
+            if (!session()->has('user_id')) {
+                return redirect('/');
+            }
+
+            $data = [
+                'nama_lengkap' => $request->input('nama_lengkap'),
+                'idTransaksi' => $request->input('id_transaksi'),
+                'nama_kategori' => $request->input('nama_kategori'),
+                'qty_slot' => $request->input('qty_slot'),
+                'nama_team' => $request->input('nama_team'),
+                'nomor_hp' => $request->input('nomor_hp'),
+                'foto' => $request->input('foto_depan')
+            ];
+    
+            $pdf = Pdf::loadView('reportpdf', compact('data'));
+            return $pdf->download($request->input('id_transaksi') . '.pdf');
 
         }catch(\Exception $e){
             Log::error('Error occurred report : ' . $e->getMessage());

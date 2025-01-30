@@ -115,6 +115,17 @@
                                     data-qtyslot="{{ $item->qty_slot }}">
                                     Detail
                                 </button>
+                                <form method="GET" action="/downloadreport">
+                                    @csrf
+                                    <input type="hidden" name="nama_lengkap" value="{{ $item->nama_lengkap }}">
+                                    <input type="hidden" name="id_transaksi" value="{{ $item->id_transaksi }}">
+                                    <input type="hidden" name="nama_kategori" value="{{ $item->nama_kategori }}">
+                                    <input type="hidden" name="qty_slot" value="{{ $item->qty_slot }}">
+                                    <input type="hidden" name="nama_team" value="{{ $item->nama_team }}">
+                                    <input type="hidden" name="nomor_hp" value="{{ $item->nomor_hp }}">
+                                    <input type="hidden" name="foto_depan" value="{{ $item->foto_depan }}">
+                                    <button type="submit" name="proses" value="download" class="btn btn-success mb-2">Download</button>
+                                </form>
                                 <form method="POST" action="/postapproveuser">
                                     @csrf
                                     <input type="hidden" name="rowid" value="{{ $item->id_peserta }}">

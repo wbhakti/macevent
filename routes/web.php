@@ -35,4 +35,6 @@ Route::post('/postslider', 'App\Http\Controllers\MasterController@postslider');
 Route::post('/postevent', 'App\Http\Controllers\MasterController@postevent');
 Route::post('/postkategori', 'App\Http\Controllers\MasterController@postkategori');
 
+Route::get('/downloadreport', 'App\Http\Controllers\RegisterController@generatePDF');
+
 
